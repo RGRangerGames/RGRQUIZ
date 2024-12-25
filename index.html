@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
+            text-align: left;
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
@@ -18,11 +18,15 @@
 
         .screen {
             
-            height: 100vh;
+            /*height: 100vh;*/
             width: 100%;
             background-size: cover;
             background-position: center;
             color: black;
+        }
+        .line {
+            opacity: 0;
+            transition: opacity 1s ease;
         }
         #start-screen {
             max-width: 600px;
@@ -64,8 +68,8 @@
             width: 100%; /* Полная ширина, как у кнопок вопросов */
             margin: 10px 0;
             padding: 10px;
-            background-color: black; /* Черный фон */
-            color: white; /* Белый текст */
+            background-color: white; /* Черный фон */
+            color: black; /* Белый текст */
             border: none;
             border-radius: 5px; /* Скругленные углы */
             cursor: pointer;
@@ -98,6 +102,7 @@
             margin-bottom: 10px;
         }
         #question {
+            text-align: center;
             font-size: 20px;
             font-weight: bold;
             color: #000;
@@ -163,10 +168,10 @@
 
     <div id="start-screen" class="screen">
         <div class="screen-content">
-            <h1>Welcome to the Quiz!</h1>
-                <p>Совсем скоро откроется трансферное окно, в котором «Локомотив» попробует усилиться, чтобы продолжить гонку за медалями и отыграть 4 очка отрыва. <br><br>
-                Но сейчас ошибаться в выборе игрока нельзя, как это бывало раньше. <br><br>
-                Кроме того, нет денег на покупку нового сильного игрока...</p>
+            <h1 сlass="line">Welcome to the Quiz!</h1>
+                <p сlass="line">Совсем скоро откроется трансферное окно, в котором «Локомотив» попробует усилиться, чтобы продолжить гонку за медалями и отыграть 4 очка отрыва.</p> 
+                <p сlass="line"> Но сейчас ошибаться в выборе игрока нельзя, как это бывало раньше.</p>
+                <p сlass="line">Кроме того, нет денег на покупку нового сильного игрока...</p>
             <button onclick="goToIntro()">Далее</button>
         </div>
     </div>
@@ -174,11 +179,11 @@
     <div id="intro-screen" class="screen">
         <div class="screen-content">
          <h1>Get Ready!</h1>
-                <p>RGR дает возможность получить кешбэк за провальные трансферы последних 20 лет. <br><br>
-                При правильных ответах на вопросы сумма их трансфера вернется, и в финале ты сможешь выбрать хорошего игрока для усиления. <br><br>
-                Со всеми кандидатами имеется предварительная договоренность. <br>
-                Все зависит от тебя!<br><br>
-                Удачи! </p>
+                <p сlass="line">RGR дает возможность получить кешбэк за провальные трансферы последних 20 лет.</p> 
+                <p сlass="line">При правильных ответах на вопросы сумма их трансфера вернется, и в финале ты сможешь выбрать хорошего игрока для усиления.</p>
+                <p сlass="line">Со всеми кандидатами на трансфер имеется предварительная договоренность.</p> 
+                <p сlass="line">Все зависит от тебя!</p>
+                <p сlass="line">Удачи! </p>
         <button onclick="startQuiz()">Начнем!</button>
         </div>
     </div>
@@ -197,8 +202,15 @@
         <button id="next-btn" onclick="nextQuestion()">Далее</button>
     </div>
     <div id="final-screen" style="display: none;">
-        <h2>Ваши очки: <span id="final-score"></span></h2>
-        <button id="cashback-btn" onclick="getCashback()">Получить кэшбэк</button>
+        <h2>Спасибо тебе, болельщик московского Локомотива!</h2>
+        <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="final-score"></span> млн. евро! </p>
+        <p> Теперь ты можешь потратить их на усиление состава. </p>
+
+
+
+
+        
+        <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
     </div>
 
@@ -368,7 +380,7 @@
             { src: "images/lern32.jpg", price: 32 },
             { src: "images/kyky30.jpg", price: 30 },
             { src: "images/glebov8.jpg", price: 8 },
-            { src: "images/gerdji2,5jpg", price: 2 },
+            { src: "images/gerdji25.jpg", price: 3 },
             { src: "images/deBR35.jpg", price: 35 },
             { src: "images/brandt35.jpg", price: 35 },
             { src: "images/bilal20.jpg", price: 20 },
@@ -376,15 +388,33 @@
             { src: "images/stouns32.jpg", price: 32 },
             { src: "images/tuk16.jpg", price: 16 },
             { src: "images/stani28.jpg", price: 35 },
+            { src: "images/vera3,2.jpg", price: 4 },
+            { src: "images/daku7.jpg", price: 7 },
+            { src: "images/kokorin07.jpg", price: 1 },
+            { src: "images/mad60.jpg", price: 60 },
+            { src: "images/olmo60.jpg", price: 60 },
+            { src: "images/sergeev3.jpg", price: 3 },
+            { src: "images/grizmann25.jpg", price: 25 },
+            { src: "images/utkin35.jpg", price: 4 },
+            { src: "images/zina25.jpg", price: 3 },
+            { src: "images/paltzev2.jpg", price: 2 },
 
 
 
 
 
-            
-            /*{ src: "images/brandt35.jpg", price: 35 },
+
+             /*{ src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
             { src: "images/brandt35.jpg", price: 35 },
             { src: "images/brandt35.jpg", price: 35 },*/
+
 
 
 
@@ -490,7 +520,7 @@
                 const cashbackImage = eligibleImages[randomIndex];
 
                 const cashbackDiv = document.getElementById("cashback-result");
-                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" alt="Cashback" width="200px">`;
+                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="590px">`;
             } else {
                 const cashbackDiv = document.getElementById("cashback-result");
                 cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
