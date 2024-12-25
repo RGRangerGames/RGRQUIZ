@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+
+
+
+        .screen {
+            
+            height: 100vh;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            color: black;
+        }
+        #start-screen {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: #000;
+            /*background-image: url('start-image-1.jpg');*/
+        }
+        #intro-screen {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: #000;
+            /*background-image: url('start-image-2.jpg');*/
+        }
+
+        #start-screen h1, #intro-screen h1 {
+            font-size: 28px; /* Измените размер текста */
+            color: #333; /* Измените цвет текста */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Добавьте тень для эффекта */
+        }
+
+        #start-screen p, #intro-screen p {
+            font-size: 18px; /* Измените размер текста */
+            color: #666; /* Измените цвет текста */
+            margin-top: 10px;
+        }    
+
+
+        #start-screen button, #intro-screen button {
+            display: block;
+            width: 100%; /* Полная ширина, как у кнопок вопросов */
+            margin: 10px 0;
+            padding: 10px;
+            background-color: black; /* Черный фон */
+            color: white; /* Белый текст */
+            border: none;
+            border-radius: 5px; /* Скругленные углы */
+            cursor: pointer;
+            font-size: 16px; /* Размер шрифта */
+            
+        }
+
+        #start-screen button:hover, #intro-screen button:hover {
+            background-color: #444; /* Цвет фона при наведении */
+        }
+
+
+        #quiz-container {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        #question-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        #question-text, #question-text-1 {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        #question {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            margin: 20px 0;
+        }
+        #explanation {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+        .option {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .option.correct {
+            background-color: green;
+        }
+        .option.incorrect {
+            background-color: red;
+        }
+        #next-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #next-btn:hover {
+            background-color: #0056b3;
+        }
+        #final-screen {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        #cashback-result img {
+            margin: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    <div id="start-screen" class="screen">
+        <div class="screen-content">
+            <h1>Welcome to the Quiz!</h1>
+                <p>Совсем скоро откроется трансферное окно, в котором «Локомотив» попробует усилиться, чтобы продолжить гонку за медалями и отыграть 4 очка отрыва. <br><br>
+                Но сейчас ошибаться в выборе игрока нельзя, как это бывало раньше. <br><br>
+                Кроме того, нет денег на покупку нового сильного игрока...</p>
+            <button onclick="goToIntro()">Далее</button>
+        </div>
+    </div>
+
+    <div id="intro-screen" class="screen">
+        <div class="screen-content">
+         <h1>Get Ready!</h1>
+                <p>RGR дает возможность получить кешбэк за провальные трансферы последних 20 лет. <br><br>
+                При правильных ответах на вопросы сумма их трансфера вернется, и в финале ты сможешь выбрать хорошего игрока для усиления. <br><br>
+                Со всеми кандидатами имеется предварительная договоренность. <br>
+                Все зависит от тебя!<br><br>
+                Удачи! </p>
+        <button onclick="startQuiz()">Начнем!</button>
+        </div>
+    </div>
+
+
+
+
+
+    <div id="quiz-container">
+        <img id="question-image" src="image1.jpg" alt="Question Image">
+        <h2 id="question-text">Текст 1</h2>
+        <h2 id="question-text-1"></h2>
+        <h3 id="question"></h3>
+        <div id="options"></div>
+        <div id="explanation"></div>
+        <button id="next-btn" onclick="nextQuestion()">Далее</button>
+    </div>
+    <div id="final-screen" style="display: none;">
+        <h2>Ваши очки: <span id="final-score"></span></h2>
+        <button id="cashback-btn" onclick="getCashback()">Получить кэшбэк</button>
+        <div id="cashback-result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                image1: "images/dacoshta_1.jpg",
+                text1: "Мануэль Да Кошта запомнился своими удивительными 2 голами, которые перевернули игру с Зенитом в 2011.",
+                text1_1: "Но в матче с ЦСКА португалец получил прямую красную карточку и больше не попадал в стартовый состав.",
+                question: "На какой минуте это случилось?",
+                options: ["3 минута", "7 минута", "46 минута", "92 минута"],
+                correct: 1,
+                explanation: " ",
+                points: 2,
+                image2: "images/dacoshta2.jpg",
+                text2: "После того дерби, Мануэля к стартовому составу не подпускали и в следующее трансферное окно был продаван в Сивасспор.",
+                text2_2: "После этого его карьера в России не сложилась."
+            },
+            {
+                image1: "images/sel1.jpg",
+                text1: "Иногда топ клубы удивляют покупкой крайне молодого игрока за бешенные деньги. Что уж далеко ходить, но переход Эдегора в Реал помнят все.",
+                text1_1: "Но однажды Локомотив пошел тем же путем и решил вложиться в новую звезду.",
+                question: "Какого игрока Локомотив подписал в 16 летнем возрасте за 5 млн. долларов в 2006 году?",
+                options: ["Майкон", "Фининьо", "Селсиньо", "Шарлес"],
+                correct: 2,
+                explanation: " ",
+                points: 5,
+                image2: "images/sel2.jpg",
+                text2: "Именно поэтому Селсиньо перебрался в Россию со своей мамой, которую устроили работать в клуб.",
+                text2_2: "Наследник Роналдиньо не смог адаптироватсья ко взрослому футболу и стал больше времени проводить в кабаках."
+            },
+            {
+                image1: "images/ibri1.jpg",
+                text1: "Все мы любим различные статистические топ-листы, особенно когда в них входят игроки любимой команды.",
+                question: "Какого игрока Смородская представила, как 'игрока, который входит в топ-10 в Европе' на позиции полузащитника в 2011 году?",
+                options: ["Ибричич", "Сапатер", "Хартияди", "Торбинский"],
+                correct: 0,
+                explanation: " ",
+                points: 5,
+                image2: "images/ibri2.jpg",
+                text2: "Если в начале своего забега в Локомотиве его трансфер выглядел оправданно, не смотря на заявление Смородской, то уже в начале 2012 года все изменилось и играть он перестал.",
+                text2_2: "Сенияд в открытую заявлял, что хочет вернуться в Хайдук."
+            },
+            {
+                image1: "images/Sapater1.jpg",
+                text1: "В Локомотиве до прихода Дзюбы был тоже игрок, который называл себя Львом",
+                question: "Какой игрок Локомотива имел прозвище 'Лев из Эхеа' (El Leon de Ejea)?",
+                options: ["Фернандеш", "Эдер", "Сапатер", "Да Кошта"],
+                correct: 2,
+                explanation: " ",
+                points: 4,
+                image2: "images/Sapater2.jpg",
+                text2: "Рожденный в Эхеа-де-лос-Кабальерос Альберто Сапатер не смог за 4 года показать свой львиный характер на поле, потому что постоянно был в лазарете.",
+            
+            },
+            {
+                image1: "images/Basha1.jpg",
+                text1: "Иногда футболисты попадают в стартовый состав не по игровым качествам.",
+                question: "Кого Ольга Смородская называла в 2010 году самым красивым мужчиной в своем составе?",
+                options: ["Денис Глушаков", "Милан Миланович", "Дмитрий Тарасов", "Марко Баша"],
+                correct: 3,
+                explanation: " ",
+                points: 6,
+                image2: "images/basha2.jpg",
+                text2: "Марко Баша полноценно заменить травму Родолфо так и не смог",
+                
+            },
+            {
+                image1: "images/mud1.jpg",
+                text1: "*Нас уже не удивляют истории агентских войн во время перехода в другую команду. Но иногда переход игрока подписывает не легитимный президент клуба.",
+                question: "При переходе какого игрока из Крыльев Советов данный трансфер был подписан не легитимным президентом самарцев?",
+                options: ["Муджири", "Салтыков", "Глушенков", "Бурлак"],
+                correct: 0,
+                explanation: " ",
+                points: 3,
+                image2: "images/mud2.jpg",
+                text2: "Трансферный контракт был подписан Александром Барановским (экс-президентом Крыльев), а новое руководство не собиралось отпукать игрока. В феврале 2008 г. состоялась встреча представителей двух клубов, по итогом которой все притензии были сняты. Из-за частых прогулов тренировок контракт был разован в 2010 году.  ",
+                text2_2: "Единственное приятное воспоминание об игре Давида в составе Локо - его прямой гол с углового в домашнем матче с Тереком в 2009 году."
+            },
+            {
+                image1: "image3.jpg",
+                text1: "Бай Джиби Фалл приехал в Локо, в надежде стать основным игроком атаки. Сенегалец не смог адаптироваться в России и был отправлен в аренду, в которой он умудрился стать лучшим бомбардиром.",
+                question: "В чемпионат какой страны был отправлен Джиби Фалл?",
+                options: ["Дания", "Швеция", "Финляндия", "Норвегия"],
+                correct: 3,
+                explanation: " ",
+                points: 5,
+                image2: "images/djibi2.jpg",
+                text2: "Джиби Фалл забил 19 голов в составе Мольде и вернулся в Локомотив, чтобы продолжить свою голевую феерию. Но по возвращению начал снова играть крайне плохо и ушел из команды.",
+            },
+            {
+                image1: "images/king1.jpg",
+                text1: "Помимо эпизода с фолом на Леандро Фернандесе в дерби с Динамо в 2006 году и длительной дисквалификации Ларри Кингстон запомнился ещё одной историей в этот день.",
+                question: "Какой инцидент произошел с Кингстоном и Баффуром Гьяном, после того матча с Динамо?",
+                options: ["Шли домой пешком", "Полиция отобрала права", "Их машину обстреляли", "Закрыли в раздевалке"],
+                correct: 2,
+                explanation: " ",
+                points: 4,
+                image2: "images/kingston2.jpg",
+                text2: "Сидя на задних сиденьях Гьян и Кингстон услышали хлопок и отверстие от пули в заднем стекле. Как утверждал потом Ларри, что он не придал особого значения, надеясь, что кто-то ошибся и не собирался стрелять именно в ганского весельчака, поэтому ответной стрельбы не последовало.",
+                text2_2: ""
+            },
+            {
+                image1: "images/sharl1.jpg",
+                text1: "Трансфер Шарлеса был максимально странный, потому что за неизвестного футболиста железнодорожники отдали целых 5 млн. евро",
+                question: "Где подрабатывал Шарлес до перехода в Локомотив",
+                options: ["Автомойщик", "Музыкант", "Наркоторговец", "Полицейский"],
+                correct: 0,
+                points: 3,
+                explanation: " ",
+                image2: "images/sharl2.jpg",
+                text2: "После работы на автомойке и прехода в Локо Шарлес не смог раскрытсья из-за частых травм.",
+                text2_2: "Российский период карьеры законичлся тем, что он сам выкупил себя у клуба и уехал обратно на родину."
+            },
+            {
+                image1: "images/lev1.jpg",
+                text1: "Иван Левенец вошел в историю Локомотива своим ляпом в матче за Суперкубок 2008 года, а также зярядом фанатов 'Левенец иди в атаку'!",
+                text1_1: "Но за год до этого в составе Амкара, Иван стал единственным игроком в составе, который сделал это.",
+                question: "Каким рекордом обладает Иван Левенец в составе Амкара 2007 года?",
+                options: ["Отбил все пенальти", "Сыграл все матчи", "Пропустил в каждом матче", "Отдал 5 голевых передач"],
+                correct: 1,
+                points: 3,
+                explanation: " ",
+                image2: "images/lev2.jpg",
+                text2: "В сезоне 2007 года Иван был единственный игрок, который отыграл все матчи сезона в стартовом составе.",
+                text2_2: "Но не смотря на это заиграть на должном уровне после того ужасного ляпа так и не смог, поэтому разорвал контракт и уехал на свою малую родину - Анапу. И на профессиональном уровне больше никогда не играл."
+            },
+            {
+                image1: "image3.jpg",
+                text1: "Иван Левенец вошел в историю Локомотива своим ляпом в матче за Суперкубок 2008 года, а также зярядом фанатов 'Левенец иди в атаку'!",
+                text1_1: "Но за год до этого в составе Амкара, Иван стал единственным игроком в составе, который сделал это.",
+                question: "Каким рекордом обладает Иван Левенец в составе Амкара 2007 года?",
+                options: ["Отбил все пенальти", "Сыграл все матчи", "Пропустил в каждом матче", "Отдал 5 голевых передач"],
+                correct: 1,
+                points: 3,
+                explanation: " ",
+                image2: "images/djibi2.jpg",
+                text2: "В сезоне 2007 года Иван был единственный игрок, который отыграл все матчи сезона в стартовом составе.",
+                text2_2: "Но не смотря на это заиграть на должном уровне после того ужасного ляпа так и не смог, поэтому разорвал контракт и уехал на свою малую родину - Анапу."
+            },
+            {
+                image1: "image3.jpg",
+                text1: "Иван Левенец вошел в историю Локомотива своим ляпом в матче за Суперкубок 2008 года, а также зярядом фанатов 'Левенец иди в атаку'!",
+                text1_1: "Но за год до этого в составе Амкара, Иван стал единственным игроком в составе, который сделал это.",
+                question: "Каким рекордом обладает Иван Левенец в составе Амкара 2007 года?",
+                options: ["Отбил все пенальти", "Сыграл все матчи", "Пропустил в каждом матче", "Отдал 5 голевых передач"],
+                correct: 1,
+                points: 15,
+                explanation: " ",
+                image2: "images/djibi2.jpg",
+                text2: "В сезоне 2007 года Иван был единственный игрок, который отыграл все матчи сезона в стартовом составе.",
+                text2_2: "Но не смотря на это заиграть на должном уровне после того ужасного ляпа так и не смог, поэтому разорвал контракт и уехал на свою малую родину - Анапу."
+            }
+
+
+
+
+        ];
+
+        // Список изображений и их стоимости
+        const cashbackImages = [
+
+
+
+            { src: "images/mendi20.jpg", price: 20 },
+            { src: "images/maynt32.jpg", price: 32 },
+            { src: "images/lern32.jpg", price: 32 },
+            { src: "images/kyky30.jpg", price: 30 },
+            { src: "images/glebov8.jpg", price: 8 },
+            { src: "images/gerdji2,5jpg", price: 2 },
+            { src: "images/deBR35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/bilal20.jpg", price: 20 },
+            { src: "images/osipenko5.jpg", price: 5 },
+            { src: "images/stouns32.jpg", price: 32 },
+            { src: "images/tuk16.jpg", price: 16 },
+            { src: "images/stani28.jpg", price: 35 },
+
+
+
+
+
+            
+            /*{ src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },
+            { src: "images/brandt35.jpg", price: 35 },*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+
+        function goToIntro() {
+             document.getElementById('start-screen').style.display = 'none';
+             document.getElementById('intro-screen').style.display = 'block';
+        }
+        function startQuiz() {
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            loadQuestion();
+        }
+
+
+
+        function loadQuestion(questionIndex) {
+            const questionData = quizData[questionIndex];
+            document.getElementById("question-image").src = questionData.image1;
+            document.getElementById("question-text").textContent = questionData.text1;
+            document.getElementById("question-text-1").textContent = questionData.text1_1 || '';
+            document.getElementById("question").textContent = questionData.question;
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = '';
+
+            questionData.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.classList.add('option');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(index);
+                optionsDiv.appendChild(button);
+            });
+
+            document.getElementById("explanation").textContent = '';
+            document.getElementById("next-btn").style.display = 'none';
+        }
+
+        function checkAnswer(selectedIndex) {
+            const questionData = quizData[currentQuestionIndex];
+            const optionsDiv = document.getElementById("options");
+            const buttons = optionsDiv.querySelectorAll('.option');
+
+            buttons.forEach((button, index) => {
+                button.disabled = true;
+                if (index === selectedIndex) {
+                    if (index === questionData.correct) {
+                        button.classList.add('correct');
+                        score += questionData.points;
+                    } else {
+                        button.classList.add('incorrect');
+                    }
+                }
+            });
+
+            // Update the image and text after the answer is selected
+            document.getElementById("question-image").src = questionData.image2;
+            document.getElementById("question-text").textContent = questionData.text2;
+            document.getElementById("question-text-1").textContent = questionData.text2_2 || '';
+
+            document.getElementById("explanation").textContent = questionData.explanation;
+            document.getElementById("next-btn").style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion(currentQuestionIndex);
+            } else {
+                showFinalScreen();
+            }
+        }
+
+        function showFinalScreen() {
+            document.getElementById("quiz-container").style.display = 'none';
+            document.getElementById("final-screen").style.display = 'block';
+            document.getElementById("final-score").textContent = score;
+        }
+
+        // Функция для получения случайного кэшбэка
+        function getCashback() {
+            // Фильтруем изображения, чтобы найти те, стоимость которых <= набранным очкам
+            const eligibleImages = cashbackImages.filter(image => image.price <= score);
+
+            if (eligibleImages.length > 0) {
+                // Выбираем случайное изображение из подходящих
+                const randomIndex = Math.floor(Math.random() * eligibleImages.length);
+                const cashbackImage = eligibleImages[randomIndex];
+
+                const cashbackDiv = document.getElementById("cashback-result");
+                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" alt="Cashback" width="200px">`;
+            } else {
+                const cashbackDiv = document.getElementById("cashback-result");
+                cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
+            }
+        }
+
+        loadQuestion(currentQuestionIndex);
+    </script>
+</body>
+</html>
