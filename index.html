@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RGR.Quiz</title>
+    <title>Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -374,49 +374,70 @@
 
         // Список изображений и их стоимости
         const cashbackImages = [
+            
 
+            //Дешевые
+            { src: "images/kokorin07.jpg", price: 1 },
+            { src: "images/bayramyan1.jpg", price: 1 },
+            { src: "images/paltzev2.jpg", price: 2 },
+            { src: "images/kychaev12.jpg", price: 2 },
+            { src: "images/sytormin12.jpg", price: 2 },
+            { src: "images/sergeev3.jpg", price: 3 },
+            { src: "images/zina25.jpg", price: 3 },
+            { src: "images/langovich3.jpg", price: 3 },
+            { src: "images/shetinin28.jpg", price: 3 },
+            { src: "images/vaxani3.jpg", price: 3 },
+            { src: "images/gerdji25.jpg", price: 3 },
+            { src: "images/vera3,2.jpg", price: 4 },
+            { src: "images/utkin35.jpg", price: 4 },
+            { src: "images/alip35.jpg", price: 4 },
+            { src: "images/komlichenko4.jpg", price: 4 },
 
+            //Бронза
+            { src: "images/osip5.jpg", price: 5 },
+            { src: "images/sronaldo5.jpg", price: 5 },
+            { src: "images/sobolev6.jpg", price: 6 },
+            { src: "images/daku7.jpg", price: 7 },
+            { src: "images/glebov8.jpg", price: 8 },
+            { src: "images/nino10.jpg", price: 10 },
 
+            //Бронза Rare
+            { src: "images/tuk16.jpg", price: 16 },
+            { src: "images/claudinio18.jpg", price: 18 },
             { src: "images/mendi20.jpg", price: 20 },
+            { src: "images/bilal20.jpg", price: 20 },
+            { src: "images/messi20.jpg", price: 20 },
+
+            //Серебро
+            { src: "images/grizmann25.jpg", price: 25 },
+
+            //Серебро Rare
+            { src: "images/kyky30.jpg", price: 30 },
             { src: "images/maynt32.jpg", price: 32 },
             { src: "images/lern32.jpg", price: 32 },
-            { src: "images/kyky30.jpg", price: 30 },
-            { src: "images/glebov8.jpg", price: 8 },
-            { src: "images/gerdji25.jpg", price: 3 },
+            { src: "images/stouns32.jpg", price: 32 },
+
+            //Золото Rare
             { src: "images/deBR35.jpg", price: 35 },
             { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/bilal20.jpg", price: 20 },
-            { src: "images/osipenko5.jpg", price: 5 },
-            { src: "images/stouns32.jpg", price: 32 },
-            { src: "images/tuk16.jpg", price: 16 },
             { src: "images/stani28.jpg", price: 35 },
-            { src: "images/vera3,2.jpg", price: 4 },
-            { src: "images/daku7.jpg", price: 7 },
-            { src: "images/kokorin07.jpg", price: 1 },
+            { src: "images/chernov05.jpg", price: 35 },
+            { src: "images/karavaev5.jpg", price: 35 },
+
+            //Ultimate
             { src: "images/mad60.jpg", price: 60 },
             { src: "images/olmo60.jpg", price: 60 },
-            { src: "images/sergeev3.jpg", price: 3 },
-            { src: "images/grizmann25.jpg", price: 25 },
-            { src: "images/utkin35.jpg", price: 4 },
-            { src: "images/zina25.jpg", price: 3 },
-            { src: "images/paltzev2.jpg", price: 2 },
 
 
 
-
-
-
-             /*{ src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },
-            { src: "images/brandt35.jpg", price: 35 },*/
-
+            /*{ src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+            { src: "images/.jpg", price: 35 },
+*/
 
 
 
@@ -583,6 +604,8 @@
         // Скрываем кнопку "Начать сначала"
             const restartButton = document.getElementById("restart-btn");
             restartButton.style.display = "none";
+
+            restartButton.addEventListener("click", goToIntro);
 
         // Если нужно, можно сбросить другие элементы, например, очки и видео
         // Очистить или сбросить остальные данные, если это нужно
