@@ -58,7 +58,7 @@
 
         #start-screen p, #intro-screen p {
             font-size: 18px; /* Измените размер текста */
-            color: #666; /* Измените цвет текста */
+            color: #fff; /* Измените цвет текста */
             margin-top: 10px;
         }    
 
@@ -204,12 +204,8 @@
     <div id="final-screen" style="display: none;">
         <h2>Спасибо тебе, болельщик московского Локомотива!</h2>
         <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="final-score"></span> млн. евро! </p>
-        <p> Теперь ты можешь потратить их на усиление состава. </p>
-
-
-
-
-        
+        <p> Теперь ты можешь потратить их на усиление состава. </p><br>
+        <p> У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
         <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
     </div>
@@ -508,24 +504,85 @@
             document.getElementById("final-screen").style.display = 'block';
             document.getElementById("final-score").textContent = score;
         }
-
-        // Функция для получения случайного кэшбэка
+        let clickCount = 0;
         function getCashback() {
-            // Фильтруем изображения, чтобы найти те, стоимость которых <= набранным очкам
-            const eligibleImages = cashbackImages.filter(image => image.price <= score);
+        // Проверяем, не достигли ли мы лимита нажатий
+        if (clickCount >= 3) {
+            const button = document.getElementById("cashback-btn");
+            button.style.display = "none";  // Скрыть кнопку
 
+            const cashbackDiv = document.getElementById("cashback-result");
+            cashbackDiv.innerHTML += `
+                <p>Спасибо за помощь.</p>
+                <p>Ты действительно помог усилить состав.</p> 
+                <p>Попробуешь еще раз?</p>
+                <button id="restart-btn" onclick="restartProgram()" style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Начать сначала</button>
+            `;
+            return;
+        }
+
+        // Увеличиваем счетчик нажатий
+        clickCount++;
+
+        // Фильтруем изображения, чтобы найти те, стоимость которых <= набранным очкам
+        const eligibleImages = cashbackImages.filter(image => image.price <= score);
+
+        // Находим блок для отображения результатов
+        const cashbackDiv = document.getElementById("cashback-result");
+
+        // Показываем видео
+        cashbackDiv.innerHTML = `
+            <video id="cashback-video" width="400px" autoplay>
+                <source src="images/gig.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        `;
+
+        // Блокируем кнопку, чтобы избежать повторного нажатия
+        const button = document.getElementById("cashback-btn");
+        button.disabled = true;
+
+        // Ждем окончания видео перед заменой
+        const video = document.getElementById("cashback-video");
+        video.onended = () => {
             if (eligibleImages.length > 0) {
                 // Выбираем случайное изображение из подходящих
                 const randomIndex = Math.floor(Math.random() * eligibleImages.length);
                 const cashbackImage = eligibleImages[randomIndex];
 
-                const cashbackDiv = document.getElementById("cashback-result");
-                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="590px">`;
+                // Заменяем видео на изображение
+                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="400px">`;
             } else {
-                const cashbackDiv = document.getElementById("cashback-result");
+                // Если нет подходящих изображений
                 cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
             }
+
+            // Разблокируем кнопку после завершения
+            button.disabled = false;
+            };
         }
+
+        function restartProgram() {
+        // Сбрасываем счетчик нажатий
+            clickCount = 0;
+
+        // Показываем кнопку снова
+            const button = document.getElementById("cashback-btn");
+            button.style.display = "inline-block"; // Показываем кнопку
+
+        // Очищаем результаты
+            const cashbackDiv = document.getElementById("cashback-result");
+            cashbackDiv.innerHTML = "";
+
+        // Скрываем кнопку "Начать сначала"
+            const restartButton = document.getElementById("restart-btn");
+            restartButton.style.display = "none";
+
+        // Если нужно, можно сбросить другие элементы, например, очки и видео
+        // Очистить или сбросить остальные данные, если это нужно
+        }
+
+
 
         loadQuestion(currentQuestionIndex);
     </script>
