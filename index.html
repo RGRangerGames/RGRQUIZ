@@ -532,7 +532,7 @@
 
         // Показываем видео
         cashbackDiv.innerHTML = `
-            <video id="cashback-video" width="150px" autoplay>
+            <video id="cashback-video" width="300px" autoplay>
                 <source src="images/gig.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
@@ -551,7 +551,7 @@
                 const cashbackImage = eligibleImages[randomIndex];
 
                 // Заменяем видео на изображение
-                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="200px">`;
+                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="350px">`;
             } else {
                 // Если нет подходящих изображений
                 cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
