@@ -168,7 +168,9 @@
 
     <div id="start-screen" class="screen">
         <div class="screen-content">
-            <h1 сlass="line">Welcome to the Quiz!</h1>
+                <img src="images/train.jpg" alt="train" style="display: block; max-width: 100%; height: auto;">
+
+            
                 <p сlass="line">Совсем скоро откроется трансферное окно, в котором «Локомотив» попробует усилиться, чтобы продолжить гонку за медалями и отыграть 4 очка отрыва.</p> 
                 <p сlass="line"> Но сейчас ошибаться в выборе игрока нельзя, как это бывало раньше.</p>
                 <p сlass="line">Кроме того, нет денег на покупку нового сильного игрока...</p>
@@ -178,7 +180,7 @@
 
     <div id="intro-screen" class="screen">
         <div class="screen-content">
-         <h1>Get Ready!</h1>
+                <img src="images/coin.png" alt="coin" style="display: block; max-width: 100%; height: auto;">
                 <p сlass="line">RGR дает возможность получить кешбэк за провальные трансферы последних 20 лет.</p> 
                 <p сlass="line">При правильных ответах на вопросы сумма их трансфера вернется, и в финале ты сможешь выбрать хорошего игрока для усиления.</p>
                 <p сlass="line">Со всеми кандидатами на трансфер имеется предварительная договоренность.</p> 
@@ -532,7 +534,7 @@
 
         // Показываем видео
         cashbackDiv.innerHTML = `
-            <video id="cashback-video" width="300px" autoplay>
+            <video id="cashback-video" width="400px" autoplay>
                 <source src="images/gig.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
@@ -551,7 +553,7 @@
                 const cashbackImage = eligibleImages[randomIndex];
 
                 // Заменяем видео на изображение
-                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" width="350px">`;
+                cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" max-width: 100%; height: auto;">`;
             } else {
                 // Если нет подходящих изображений
                 cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
