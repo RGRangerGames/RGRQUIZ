@@ -208,9 +208,10 @@
     </div>
     <div id="final-screen" style="display: none;">
         <h2>Спасибо тебе, болельщик московского Локомотива!</h2>
-        <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="final-score"></span> млн. евро! </p>
+        <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="transfer"></span> млн. евро! </p>
         <p> Теперь ты можешь потратить их на усиление состава. </p><br>
         <p> У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
+        <p> Доступный трансферный бюджет: <span id="score-display"></span> млн. евро! </p>
         <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
     </div>
@@ -386,7 +387,7 @@
             { src: "images/zina25.jpg", price: 3 },
             { src: "images/langovich3.jpg", price: 3 },
             { src: "images/shetinin28.jpg", price: 3 },
-            { src: "images/vaxani3.jpg", price: 3 },
+            { src: "images/vahani3.jpg", price: 3 },
             { src: "images/gerdji25.jpg", price: 3 },
             { src: "images/vera3,2.jpg", price: 4 },
             { src: "images/utkin35.jpg", price: 4 },
@@ -455,6 +456,10 @@
 
         let currentQuestionIndex = 0;
         let score = 0;
+        let transfer = 0;
+        
+      
+
 
 
         function goToIntro() {
@@ -529,9 +534,27 @@
         function showFinalScreen() {
             document.getElementById("quiz-container").style.display = 'none';
             document.getElementById("final-screen").style.display = 'block';
+            transfer = score;
+            document.getElementById("transfer").textContent = transfer;
+            updateScoreDisplay();
             document.getElementById("final-score").textContent = score;
+
         }
         let clickCount = 0;
+        function updateScoreDisplay() {
+            const scoreDisplay = document.getElementById("score-display");
+            scoreDisplay.innerHTML = `${score}`;
+        }
+
+// Вызываем эту функцию сразу при загрузке страницы
+            window.onload = function() {
+            updateScoreDisplay(); // Инициализируем отображение очков при старте
+        };
+
+
+
+
+
         function getCashback() {
         // Проверяем, не достигли ли мы лимита нажатий
         if (clickCount >= 3) {
@@ -579,6 +602,10 @@
 
                 // Заменяем видео на изображение
                 cashbackDiv.innerHTML = `<img src="${cashbackImage.src}" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">`;
+                score -= cashbackImage.price;
+                const scoreDisplay = document.getElementById("score-display");
+                scoreDisplay.innerHTML = `${score}`;
+                updateScoreDisplay();
             } else {
                 // Если нет подходящих изображений
                 cashbackDiv.innerHTML = `<p>У вас недостаточно очков для получения кэшбэка.</p>`;
@@ -587,6 +614,14 @@
             // Разблокируем кнопку после завершения
             button.disabled = false;
             };
+
+     
+
+
+
+
+
+
         }
 
         function restartProgram() {
