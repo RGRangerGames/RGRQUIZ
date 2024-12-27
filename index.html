@@ -210,8 +210,9 @@
         <h2>Спасибо тебе, болельщик московского Локомотива!</h2>
         <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="transfer"></span> млн. евро! </p>
         <p> Теперь ты можешь потратить их на усиление состава. </p><br>
-        <p> У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
-        <p> Доступный трансферный бюджет: <span id="score-display"></span> млн. евро! </p>
+        <p>  <strong>Доступный трансферный бюджет: <span id="score-display"></span> млн. евро!  </strong></p><br>
+        <p style="font-size: 13px; color: gray;">У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
+        <p style="font-size: 13px; color: gray;">Будь аккуратен, чем меньше останется доступного бюджета, то больше шанc, что выпадет клиент Шпинева.</p>
         <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
     </div>
@@ -563,10 +564,12 @@
 
             const cashbackDiv = document.getElementById("cashback-result");
             cashbackDiv.innerHTML += `
-                <p>Спасибо за помощь.</p>
-                <p>Ты действительно помог усилить состав.</p> 
+                <p>Спасибо тебе за помощь!</p>
+                <p>Ты доволен новым приобретением?</p>
                 <p>Попробуешь еще раз?</p>
-                <button id="restart-btn" onclick="restartProgram()" style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Начать сначала</button>
+                <button id="restart-btn" onclick="restartProgram()" style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Начать сначала</button><br>
+                <p style="font-size: 13px; color: gray;">RGR</p>
+
             `;
             return;
         }
