@@ -625,27 +625,9 @@
         }
 
         function restartProgram() {
-        // Сбрасываем счетчик нажатий
-            clickCount = 0;
 
-        // Показываем кнопку снова
-            const button = document.getElementById("cashback-btn");
-            button.style.display = "inline-block"; // Показываем кнопку
-
-        // Очищаем результаты
-            const cashbackDiv = document.getElementById("cashback-result");
-            cashbackDiv.innerHTML = "";
-
-        // Скрываем кнопку "Начать сначала"
-            const restartButton = document.getElementById("restart-btn");
-            restartButton.style.display = "none";
-
-            restartButton.addEventListener("click", goToIntro);
-
-        // Если нужно, можно сбросить другие элементы, например, очки и видео
-        // Очистить или сбросить остальные данные, если это нужно
+            location.reload();
         }
-
 
 
         loadQuestion(currentQuestionIndex);
