@@ -31,6 +31,20 @@
             opacity: 0;
             transition: opacity 1s ease;
         }
+
+        .info-box {
+            max-width: 350px;
+            margin: 0 auto;
+            background-color: black; /* Черный фон */
+            color: white; /* Цвет текста */
+            border-radius: 10px; /* Закругленные углы */
+            padding: 10px; /* Внутренний отступ */
+            text-align: justify; /* Выравнивание текста по ширине */
+            font-size: 12px;
+            margin-bottom: 10px;
+            
+        }
+
         #start-screen {
             max-width: 600px;
             margin: 0 auto;
@@ -211,8 +225,11 @@
         <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="transfer"></span> млн. евро! </p>
         <p> Теперь ты можешь потратить их на усиление состава. </p><br>
         <p>  <strong>Доступный трансферный бюджет: <span id="score-display"></span> млн. евро!  </strong></p><br>
-        <p style="font-size: 13px; color: gray;">У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
-        <p style="font-size: 13px; color: gray;">Будь аккуратен, чем меньше останется доступного бюджета, то больше шанc, что выпадет клиент Шпинева.</p>
+        <div class="info-box">
+            <p>У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
+            <p>Будь аккуратен, чем меньше останется доступного бюджета, то больше шанс, что выпадет клиент Шпинева.</p>
+        </div>
+        <br>
         <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
     </div>
