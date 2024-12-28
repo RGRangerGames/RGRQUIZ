@@ -33,14 +33,16 @@
         }
 
         .info-box {
-            max-width: 350px;
-            margin: 0 auto;
+           
             background-color: black; /* Черный фон */
             color: white; /* Цвет текста */
             border-radius: 10px; /* Закругленные углы */
             padding: 10px; /* Внутренний отступ */
-            text-align: justify; /* Выравнивание текста по ширине */
-            font-size: 12px;
+            text-align: center; /* Выравнивание текста по ширине */
+            display: block; 
+            margin: 0 auto; 
+            max-width: 100%; 
+            height: auto;
             margin-bottom: 10px;
             
         }
@@ -221,14 +223,15 @@
         <button id="next-btn" onclick="nextQuestion()">Далее</button>
     </div>
     <div id="final-screen" style="display: none;">
+        <div class="info-box">
         <h2>Спасибо тебе, болельщик московского Локомотива!</h2>
         <p> Благодаря твоей мыслительной работе клуб смог вернуть целых  <span id="transfer"></span> млн. евро! </p>
-        <p> Теперь ты можешь потратить их на усиление состава. </p><br>
-        <p>  <strong>Доступный трансферный бюджет: <span id="score-display"></span> млн. евро!  </strong></p><br>
-        <div class="info-box">
-            <p>У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
-            <p>Будь аккуратен, чем меньше останется доступного бюджета, то больше шанс, что выпадет клиент Шпинева.</p>
+        <p> Теперь ты можешь потратить их на усиление состава. </p>
         </div>
+        <br>
+        <p>  <strong>Доступный трансферный бюджет: <span id="score-display"></span> млн. евро!  </strong></p><br>
+            <p style="font-size: 12px; color: gray;">У тебя есть возможность три раза поменять игрока, просто нажми снова на кнопку.</p>
+            <p style="font-size: 12px; color: gray;">Будь аккуратен, чем меньше останется доступного бюджета, то больше шанс, что выпадет клиент Шпинева.</p>
         <br>
         <button id="cashback-btn" onclick="getCashback()"style="background-color: black; color: white; border: none; padding: 10px 20px; cursor: pointer;">Получить кэшбэк</button>
         <div id="cashback-result" style="margin-top: 20px;"></div>
@@ -398,15 +401,11 @@
                 text2_2: "Он забил всего 1 гол с пенальти в Локо и через 2 года Хенти был продан в 10 раз меньше/"
             }
 
-
-
-
         ];
 
         // Список изображений и их стоимости
         const cashbackImages = [
             
-
             //Дешевые
 
             { src: "images/kokorin07.jpg", price: 1 },
@@ -421,7 +420,7 @@
             { src: "images/sergeev3.jpg", price: 3 },
             { src: "images/zina25.jpg", price: 3 },
             { src: "images/gonsales28.jpg", price: 3 },
-            { src: "images/langovich3.jpg", price: 3 },
+            { src: "images/Langovich3.jpg", price: 3 },
             { src: "images/pyanich25.jpg", price: 3 },
             { src: "images/shetinin28.jpg", price: 3 },
             { src: "images/vaxani3.jpg", price: 3 },
@@ -464,7 +463,6 @@
             { src: "images/Abraham20.jpg", price: 20 },
             { src: "images/loftusch20.jpg", price: 20 },
             
-
             //Серебро
             { src: "images/bellanova22.jpg", price: 22 },
             { src: "images/grizmann25.jpg", price: 25 },
@@ -485,27 +483,10 @@
             { src: "images/scalvini45.jpg", price: 45 },
             { src: "images/reinders50.jpg", price: 50 },
             { src: "images/teoern50.jpg", price: 50 },
-          
-          
 
             //Ultimate Plus
             { src: "images/mad60.jpg", price: 60 },
             { src: "images/olmo60.jpg", price: 60 },
-
-
-
-
-
-
-            
-            
-            
-
-
-            
-            
-         
-
 
 /*
 
@@ -515,6 +496,7 @@
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
+            
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
@@ -522,9 +504,6 @@
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
             { src: "images/.jpg", price: 60 },
-
-
-
 
             { src: "images/olmo60.jpg", price: 60 },
             { src: "images/olmo60.jpg", price: 60 },
@@ -576,31 +555,11 @@
             { src: "images/olmo60.jpg", price: 60 },
 
 */
-
-          
-          
-            
-        
-            
-            
-
-            
-            
-          
-            
-            
-            
-
-
         ];
 
         let currentQuestionIndex = 0;
         let score = 0;
         let transfer = 0;
-        
-      
-
-
 
         function goToIntro() {
              document.getElementById('start-screen').style.display = 'none';
@@ -611,7 +570,6 @@
             document.getElementById('quiz-container').style.display = 'block';
             loadQuestion();
         }
-
 
 
         function loadQuestion(questionIndex) {
@@ -692,9 +650,6 @@
         };
 
 
-
-
-
         function getCashback() {
         // Проверяем, не достигли ли мы лимита нажатий
         if (clickCount >= 3) {
@@ -756,12 +711,6 @@
             // Разблокируем кнопку после завершения
             button.disabled = false;
             };
-
-     
-
-
-
-
 
 
         }
